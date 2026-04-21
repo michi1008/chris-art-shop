@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 import "./ResetPassword.css";
 
 const ResetPassword = () => {
+  console.log("RESET PASSWORD COMPONENT MOUNTED");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { token } = useParams();
@@ -32,22 +33,27 @@ const ResetPassword = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-      if (newPassword !== confirmPassword) {
-        toast.error('Passwords do not match');
-      } else if (!isPasswordStrong(newPassword)) {
-        toast.error('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character');
-      } else {
-      return;
-    }
-    try {
-      await resetPassword({ token, newPassword }).unwrap();
-      toast.success("Password reset successful");
-      navigate("/login");
-    } catch (err) {
-      toast.error(err?.data?.message || "Something went wrong");
-    }
-  };
+  e.preventDefault();
+    console.log("RESET PASSWORD SUBMIT FIRED");
+  if (newPassword !== confirmPassword) {
+    toast.error("Passwords do not match");
+    return;
+  }
+
+  if (!isPasswordStrong(newPassword)) {
+    toast.error("Password must be strong");
+    return;
+  }
+
+  try {
+    await resetPassword({ token, newPassword }).unwrap();
+    toast.success("Password reset successful");
+    console.log("Submitting reset password...");
+    navigate("/login");
+  } catch (err) {
+    toast.error(err?.data?.message || "Something went wrong");
+  }
+};
 
   if (isLoading) {
     return <Loader />;
@@ -75,7 +81,7 @@ const ResetPassword = () => {
             required
           />
           <div>
-            <button type="submit">Reset Password</button>
+            <button type="submit" onClick={() => console.log("BUTTON CLICKED")}>Reset Password</button>
           </div>
         </form>
       </div>

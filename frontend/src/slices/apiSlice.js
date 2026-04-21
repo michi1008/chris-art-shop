@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTpyes: ['Product', 'Order', 'User'],
+  tagTypes: ['Product', 'Order', 'User'],
   endpoints: (builder) => ({
     forgetPassword: builder.mutation({
       query: ({email}) => ({

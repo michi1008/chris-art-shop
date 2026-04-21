@@ -264,34 +264,37 @@ const forgetPassword = asyncHandler(async (req, res) => {
 
 const resetPassword = asyncHandler(async (req, res) => {
   try {
-    // Verify the token sent by the user
-    const decodedToken = jwt.verify(req.params.token, process.env.JWT_SECRET);
+    // Verify token
+    const decodedToken = jwt.verify(
+      req.params.token,
+      process.env.JWT_SECRET
+    );
 
-    // Find the user with the id from the token
+    // Find user
     const user = await User.findById(decodedToken.userId);
 
     if (!user) {
       return res.status(401).send({ message: "No user found" });
     }
 
-    // Hash the new password
+    // Hash new password
     const salt = await bcrypt.genSalt(10);
-    req.body.newPassword = await bcrypt.hash(req.body.newPassword, salt);
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
 
-    const updatedUser = await User.findByIdAndUpdate(
-      decodedToken.userId,
-      { password: req.body.newPassword },
-      { new: true }
-    );
+    // Update password on user object
+    user.password = hashedPassword;
 
-    if (!updatedUser) {
-      return res.status(401).send({ message: "Failed to update password" });
+    // Save to DB (IMPORTANT CHANGE)
+    await user.save();
+
+    res.status(200).send({ message: "Password updated" });
+
+  } catch (err) {
+    // Better error handling for expired/invalid token
+    if (err.name === "TokenExpiredError") {
+      return res.status(401).send({ message: "Token expired" });
     }
 
-    // Send success response
-    res.status(200).send({ message: "Password updated" });
-  } catch (err) {
-    // Send error response if any error occurs
     res.status(500).send({ message: err.message });
   }
 });
