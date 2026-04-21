@@ -34,7 +34,6 @@ const ResetPassword = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-    console.log("RESET PASSWORD SUBMIT FIRED");
   if (newPassword !== confirmPassword) {
     toast.error("Passwords do not match");
     return;
