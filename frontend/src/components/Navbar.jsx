@@ -38,10 +38,10 @@ const Navbar = () => {
 
   return (
     <nav>
-      <NavLink to='/' className='title' style={{ fontSize: '2rem' }}>
+      <NavLink to='/' className='title'>
         Chris Lange Fine Art Gallery
       </NavLink>
-      {userInfo ? <div className='nav-name'><h4>Hello, {userInfo.name}</h4></div> : ''}
+      {userInfo && <span className='nav-greeting'>Hello, {userInfo.name}</span>}
       <div className='menu' onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? (
           <FaWindowClose
@@ -73,7 +73,7 @@ const Navbar = () => {
             </div>
           ) : (
             <NavLink to='/login' onClick={handleLinkClick}>
-              <FaUser /> Login
+              <FaUser /> Sign In
             </NavLink>
           )}
         </li>

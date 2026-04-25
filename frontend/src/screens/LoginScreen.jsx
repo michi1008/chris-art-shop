@@ -15,7 +15,6 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
@@ -40,56 +39,57 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className='login'>
-      <div className='login-title'><h2>Login</h2></div>
-      <form className='login-form' onSubmit={submitHandler}>
-        <div className='form-item'>
-          <label>Email</label>
+    <div className='auth-page'>
+      <p className='auth-brand'>Chris Lange Fine Art</p>
+
+      <div className='auth-header'>
+        <h2>Sign In</h2>
+        <div className='auth-divider'></div>
+      </div>
+
+      <form className='auth-form' onSubmit={submitHandler}>
+        <div className='form-group'>
+          <label htmlFor='email'>Email</label>
           <input
             type='email'
-            className='login-input'
-            placeholder='Enter your email...'
+            className='auth-input'
+            placeholder='your@email.com'
             id='email'
-            name='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className='form-item'>
-          <label>Password</label>
+
+        <div className='form-group'>
+          <label htmlFor='password'>Password</label>
           <input
             type='password'
-            className='login-input'
-            placeholder='Enter your password...'
+            className='auth-input'
+            placeholder='••••••••'
             id='password'
-            name='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className='btn-container'>
-          <button className='login-btn' type='submit' disabled={isLoading}>
-            Login
-          </button>
-          
-          {isLoading && <Loader />}
 
-          <button className='login-register-btn'>
-            <Link
-              className='link'
-              to={redirect ? `/register?redirect=${redirect}` : '/register'}
-            >
-              Signup
-            </Link>
-          </button>
-          
-        </div>
+        <button className='auth-submit-btn' type='submit' disabled={isLoading}>
+          {isLoading ? 'Signing in…' : 'Sign In'}
+        </button>
+
+        {isLoading && <Loader />}
       </form>
-      <div className="forgetPassword">
-            <Link to="/forget-password" className="forgotPasswordLink">
-            Forgot Password?
+
+      <div className='auth-links'>
+        <Link to='/forget-password' className='auth-link-secondary'>
+          Forgot your password?
+        </Link>
+        <p className='auth-switch'>
+          New here?{' '}
+          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+            Create an account
           </Link>
-          </div>
+        </p>
+      </div>
     </div>
   );
 };

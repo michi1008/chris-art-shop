@@ -61,9 +61,7 @@ const HomeScreen = () => {
                 <h2>No matched result...😢</h2>
               ) : (
                 data.products.map((product) => (
-                  <h3 key={product._id}>
-                    <Product product={product} />
-                  </h3>
+                  <Product key={product._id} product={product} />
                 ))
               )}
             </div>

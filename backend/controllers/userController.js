@@ -3,7 +3,6 @@ import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 import nodemailer from "nodemailer";
-import bcrypt from "bcryptjs";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -249,13 +248,8 @@ const forgetPassword = asyncHandler(async (req, res) => {
         }; */
 
     // Send the email
-    transporter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.error("Error sending email:", err);
-        return res.status(500).send({ message: err.message });
-      }
-      res.status(200).send({ message: "Email sent" });
-    });
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ message: "Email sent" });
   } catch (err) {
     console.error("Error in forgetPassword:", err);
     res.status(500).send({ message: err.message });
@@ -277,12 +271,8 @@ const resetPassword = asyncHandler(async (req, res) => {
       return res.status(401).send({ message: "No user found" });
     }
 
-    // Hash new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
-
-    // Update password on user object
-    user.password = hashedPassword;
+    // Assign plain-text password — userModel pre('save') hook handles hashing
+    user.password = req.body.newPassword;
 
     // Save to DB (IMPORTANT CHANGE)
     await user.save();

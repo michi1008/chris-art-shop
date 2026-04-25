@@ -1,35 +1,64 @@
-form {
+.search-form {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-.search-input::placeholder {
-  color: var(--clr-primary-4);
-  opacity: 1;
+/* wrapper carries the visible border + background */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.75rem;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.search-input:focus {
-  outline: none;
-  border: 5px solid var(--clr-brown);
+.search-wrapper:focus-within {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-.search-input {
-  width: 10rem;
-  box-sizing: border-box;
-  border: 5px solid var(--clr-primary-4);
-  border-radius: 1rem;
+.search-icon {
+  color: rgba(255, 255, 255, 0.5);
   font-size: 1rem;
-  background-color: var(--clr-primary-1);
-  background-image: url("../assets/search.png");
-  background-repeat: no-repeat;
-  background-position: 10px center;
-  padding: 10px 15px 10px 35px;
-  transition: width 0.4s ease-in-out;
+  flex-shrink: 0;
 }
 
-@media (max-width: 420px) {
-  .search-input {
-    width: 12rem;
+/* override global input styles — input is bare inside the styled wrapper */
+.search-form .search-input {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  width: 8.5rem;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.9);
+  transition: width 0.3s ease;
+}
+
+.search-form .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.search-form .search-input:focus {
+  outline: none;
+  box-shadow: none;
+  width: 11.5rem;
+}
+
+@media (max-width: 1120px) {
+  .search-wrapper {
+    width: 100%;
+  }
+
+  .search-form .search-input {
+    width: 100%;
+  }
+
+  .search-form .search-input:focus {
+    width: 100%;
   }
 }

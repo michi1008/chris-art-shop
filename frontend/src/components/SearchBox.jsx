@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
 import "./SearchBox.css";
 
 const SearchBox = () => {
@@ -19,15 +20,18 @@ const SearchBox = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <input
-        className="search-input"
-        type="text"
-        name="q"
-        value={keyword}
-        placeholder="Search..."
-        onChange={(e) => setKeyword(e.target.value)}
-      />
+    <form onSubmit={submitHandler} className="search-form">
+      <div className="search-wrapper">
+        <FiSearch className="search-icon" />
+        <input
+          className="search-input"
+          type="text"
+          name="q"
+          value={keyword}
+          placeholder="Search..."
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+      </div>
     </form>
   );
 };

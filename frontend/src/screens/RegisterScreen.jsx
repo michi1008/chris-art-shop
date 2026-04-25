@@ -17,7 +17,6 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
@@ -30,21 +29,13 @@ const RegisterScreen = () => {
     }
   }, [navigate, redirect, userInfo]);
 
-  const isPasswordStrong = (password) => {
-    // Define the criteria for password strength
-    const minLength = 8; // Minimum length
-    const uppercaseRegex = /[A-Z]/; // At least one uppercase letter
-    const lowercaseRegex = /[a-z]/; // At least one lowercase letter
-    const digitRegex = /[0-9]/; // At least one digit
-    const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/; // At least one special character
-  
-    // Check if the password meets all criteria
+  const isPasswordStrong = (pw) => {
     return (
-      password.length >= minLength &&
-      uppercaseRegex.test(password) &&
-      lowercaseRegex.test(password) &&
-      digitRegex.test(password) &&
-      specialCharRegex.test(password)
+      pw.length >= 8 &&
+      /[A-Z]/.test(pw) &&
+      /[a-z]/.test(pw) &&
+      /[0-9]/.test(pw) &&
+      /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(pw)
     );
   };
 
@@ -53,7 +44,9 @@ const RegisterScreen = () => {
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
     } else if (!isPasswordStrong(password)) {
-      toast.error('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character');
+      toast.error(
+        'Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character'
+      );
     } else {
       try {
         const res = await register({ name, email, password }).unwrap();
@@ -66,70 +59,79 @@ const RegisterScreen = () => {
   };
 
   return (
-      <div className='register'>
-        <div className='register-title'><h2>Register</h2></div>
-        <form className='register-form' onSubmit={submitHandler}>
-          <div className='form-item'>
-            <label>Name</label>
-            <input
-              type='text'
-              className='register-input'
-              placeholder='Enter your name...'
-              id='name'
-              name='name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label>Email</label>
-            <input
-              type='email'
-              className='register-input'
-              placeholder='Enter your email...'
-              id='email'
-              name='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label>Password</label>
-            <input
-              type='password'
-              className='register-input'
-              placeholder='Enter your password...'
-              id='password'
-              name='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label>Password Confirm</label>
-            <input
-              type='password'
-              className='register-input'
-              placeholder='Confirm your password...'
-              id='password'
-              name='password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-          <div className='btn-container'>
-            <button className='register-btn' type='submit' disabled={isLoading}>
-              Register
-            </button>
-            {isLoading && <Loader />}
-            <button className='register-login-btn'>
-              <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-                Login
-              </Link>
-            </button>
-          </div>
-        </form>
+    <div className='auth-page'>
+      <p className='auth-brand'>Chris Lange Fine Art</p>
+
+      <div className='auth-header'>
+        <h2>Create Account</h2>
+        <div className='auth-divider'></div>
       </div>
+
+      <form className='auth-form' onSubmit={submitHandler}>
+        <div className='form-group'>
+          <label htmlFor='name'>Name</label>
+          <input
+            type='text'
+            className='auth-input'
+            placeholder='Your name'
+            id='name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div className='form-group'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            className='auth-input'
+            placeholder='your@email.com'
+            id='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className='form-group'>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            className='auth-input'
+            placeholder='••••••••'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <div className='form-group'>
+          <label htmlFor='confirmPassword'>Confirm Password</label>
+          <input
+            type='password'
+            className='auth-input'
+            placeholder='••••••••'
+            id='confirmPassword'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+
+        <button className='auth-submit-btn' type='submit' disabled={isLoading}>
+          {isLoading ? 'Creating account…' : 'Create Account'}
+        </button>
+
+        {isLoading && <Loader />}
+      </form>
+
+      <div className='auth-links'>
+        <p className='auth-switch'>
+          Already have an account?{' '}
+          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+            Sign in
+          </Link>
+        </p>
+      </div>
+    </div>
   );
 };
 
