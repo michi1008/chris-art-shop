@@ -68,9 +68,7 @@ const Filter = ({ onChange }) => {
           Clear Filter
         </button>
       </div>
-      <div className='filter-right'>
-        <div className='vl'></div>
-      </div>
+
     </form>
   );
 };

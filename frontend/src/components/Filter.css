@@ -65,17 +65,6 @@
   color: #fff;
 }
 
-/* vertical divider */
-.filter-right {
-  align-self: stretch;
-  padding-left: 1.5rem;
-}
-
-.vl {
-  width: 1px;
-  height: 100%;
-  background-color: rgba(79, 55, 80, 0.18);
-}
 
 @media screen and (max-width: 900px) {
   .filter {
@@ -106,7 +95,5 @@
     margin-top: 0.75rem;
   }
 
-  .filter-right {
-    display: none;
-  }
+
 }
