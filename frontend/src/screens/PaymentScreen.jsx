@@ -29,11 +29,18 @@ const PaymentScreen = () => {
   return (
     <div>
       <CheckoutSteps step1 step2 step3 />
-      <div className='payment'>
-        <h3 className='paymentTitle'>Payment Method</h3>
-        <form onSubmit={submitHandler} className='paymentForm'>
-          <label>
-            PayPal or Credit Card
+      <div className='payment-page'>
+        <div className='payment-header'>
+          <h2>Payment Method</h2>
+          <div className='payment-divider' />
+        </div>
+        <form onSubmit={submitHandler} className='payment-form'>
+          <div className='payment-option'>
+            <div className='payment-option-check'>✓</div>
+            <div className='payment-option-info'>
+              <p className='payment-option-title'>PayPal</p>
+              <p className='payment-option-sub'>or Credit / Debit Card</p>
+            </div>
             <input
               type='checkbox'
               id='PayPal'
@@ -41,14 +48,14 @@ const PaymentScreen = () => {
               value='PayPal'
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
+              style={{ display: 'none' }}
             />
-            <span className='checkmark'></span>
-          </label>
-          <button className='btn-continue' type='submit'>
-            Continue
-          </button>
+          </div>
+          <button type='submit'>Continue</button>
+          <p className='payment-note'>
+            Prefer another payment method? Contact the artist directly.
+          </p>
         </form>
-        <div className="paymentMethodOthers"><h3>👉 If you prefer to pay with other payment metods, please contact the artist directory. </h3></div>
       </div>
     </div>
   );

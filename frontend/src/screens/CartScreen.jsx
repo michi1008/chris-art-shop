@@ -26,73 +26,75 @@ const CartScreen = () => {
     dispatch(saveDeliveryMethod({ deliveryMethod }));
     updateCart({ ...cart, deliveryMethod });
     navigate('/login?redirect=/shipping');
-
   };
 
   return (
-    <div className='cart-container'>
-      <h1>Shopping Cart</h1>
+    <div className='cart-page'>
+      <div className='cart-page-header'>
+        <h1>Shopping Cart</h1>
+        <div className='cart-header-divider' />
+      </div>
+
       {cartItems.length === 0 ? (
-        <h5 className='cart-empty'>
-          Your cart is empty{' '}
+        <div className='cart-empty'>
+          <p>Your cart is empty.</p>
           <Link to='/'>
-            <button className='go-back-btn'>Go back</button>
+            <button>Browse Gallery</button>
           </Link>
-        </h5>
-      ) : (
-        <div className='cart-content'>
-          {cartItems.map((item) => (
-            <div className='cartItem' key={item._id}>
-              <img className='cart-image' src={item.image} alt={item.name} />
-              <Link to={`/product/${item._id}`}>
-                <div className='cart-name'><h3>{item.name}</h3></div>
-              </Link>
-              <div className='item-button'>
-                <div className='cart-price'><h3>${item.price}</h3></div>
-                <div className='trash-btn'>
-                  <button onClick={() => removeFromCartHandler(item._id)}>
-                    <FaTrash color="white" fontSize="1.5rem"/>
-                  </button>
-                </div>
-              </div>
-              <hr />
-            </div>
-          ))}
         </div>
-      )}
-
-      {/* Conditionally render subtotal, delivery option, and checkout button if cart is not empty */}
-      {cartItems.length > 0 && (
-        <>
-          <div className='total-amount'>
-            <h4>Subtotal ({cartItems.length}) items</h4>
-            <h4>
-              ${cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
-            </h4>
+      ) : (
+        <div className='cart-layout'>
+          <div className='cart-items'>
+            {cartItems.map((item) => (
+              <div className='cart-row' key={item._id}>
+                <img className='cart-row-img' src={item.image} alt={item.name} />
+                <div className='cart-row-info'>
+                  <Link to={`/product/${item._id}`}>
+                    <p className='cart-row-name'>{item.name}</p>
+                  </Link>
+                  <p className='cart-row-price'>${item.price}</p>
+                </div>
+                <button
+                  className='cart-row-remove'
+                  onClick={() => removeFromCartHandler(item._id)}
+                  title='Remove item'
+                >
+                  <FaTrash />
+                </button>
+              </div>
+            ))}
           </div>
 
-          <div className="delivery-option-container">
-            <h4>Delivery option</h4>
-            <select className='delivery-option'
-              name='deliveryMethod'
-              value={deliveryMethod}
-              onChange={(e) => setDeliveryMethod(e.target.value)}>
-              <option value=''>Select a delivery option</option>
-              <option value='shipped'>Shipped</option>
-              <option value='hand-delivered'>Hand-delivered</option>
-            </select>
-          </div>
-
-          <div className='check-out-btn'>
+          <div className='cart-summary-card'>
+            <h3>Order Summary</h3>
+            <div className='cart-summary-row'>
+              <span>Subtotal ({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'})</span>
+              <span>${cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}</span>
+            </div>
+            <hr className='cart-summary-hr' />
+            <div className='cart-delivery-group'>
+              <label className='cart-delivery-label'>Delivery Method</label>
+              <select
+                className='cart-delivery-select'
+                name='deliveryMethod'
+                value={deliveryMethod}
+                onChange={(e) => setDeliveryMethod(e.target.value)}
+              >
+                <option value=''>Select a delivery option</option>
+                <option value='shipped'>Shipped</option>
+                <option value='hand-delivered'>Hand-delivered</option>
+              </select>
+            </div>
             <button
+              className='cart-checkout-btn'
               type='button'
               onClick={checkoutHandler}
               disabled={cartItems.length === 0}
             >
-              Proceed to checkout
+              Proceed to Checkout
             </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

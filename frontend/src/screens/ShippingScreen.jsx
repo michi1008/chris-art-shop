@@ -9,15 +9,10 @@ const Shipping = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  const defaultAddress = shippingAddress ? shippingAddress.address : '';
-  const defaultCity = shippingAddress ? shippingAddress.city : '';
-  const defaultPostalCode = shippingAddress ? shippingAddress.postalCode : '';
-  const defaultState = shippingAddress ? shippingAddress.state : '';
-
-  const [address, setAddress] = useState(defaultAddress);
-  const [city, setCity] = useState(defaultCity);
-  const [postalCode, setPostalCode] = useState(defaultPostalCode);
-  const [state, setState] = useState(defaultState);
+  const [address, setAddress] = useState(shippingAddress?.address || '');
+  const [city, setCity] = useState(shippingAddress?.city || '');
+  const [postalCode, setPostalCode] = useState(shippingAddress?.postalCode || '');
+  const [state, setState] = useState(shippingAddress?.state || '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,58 +26,53 @@ const Shipping = () => {
   return (
     <div>
       <CheckoutSteps step1 step2 />
-      <div className='shipping'>
-        <div className='shippingTitle'>
-          <h3>Shipping</h3>
+      <div className='shipping-page'>
+        <div className='shipping-header'>
+          <h2>Shipping</h2>
+          <div className='shipping-divider' />
         </div>
         <form className='shipping-form' onSubmit={submitHandler}>
-          <div className='shipping-address'>
-          <label>Address: </label>
-          <input
-            type='text'
-            placeholder='Enter your address'
-            id='address'
-            name='address'
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-            </div>
-            <div className='shipping-address'>
-          <label>City: </label>
-          <input
-            type='text'
-            placeholder='Enter your city'
-            id='city'
-            name='city'
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
+          <div className='shipping-field'>
+            <label htmlFor='address'>Address</label>
+            <input
+              type='text'
+              id='address'
+              placeholder='Street address'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
           </div>
-          <div className='shipping-address'>
-          <label>Postal Code: </label>
-          <input
-            type='text'
-            placeholder='Enter your postalCode'
-            id='postalCode'
-            name='postalCode'
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-          />
+          <div className='shipping-field'>
+            <label htmlFor='city'>City</label>
+            <input
+              type='text'
+              id='city'
+              placeholder='City'
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
           </div>
-          <div className='shipping-address'>
-          <label>State: </label>
-          <input
-            type='text'
-            placeholder='Enter your state'
-            id='state'
-            name='state'
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
+          <div className='shipping-field'>
+            <label htmlFor='postalCode'>Postal Code</label>
+            <input
+              type='text'
+              id='postalCode'
+              placeholder='Postal code'
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+            />
           </div>
-          <button className='continue-btn' type='submit'>
-            Continue
-          </button>
+          <div className='shipping-field'>
+            <label htmlFor='state'>State</label>
+            <input
+              type='text'
+              id='state'
+              placeholder='State'
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            />
+          </div>
+          <button type='submit'>Continue</button>
         </form>
       </div>
     </div>

@@ -1,60 +1,77 @@
-.shipping {
-  width: 100%;
-  border-radius: 3px;
-  height: 60%; 
-  padding: 3rem;
+.shipping-page {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  font-size: 1.5rem;
-  overflow-x: hidden; 
-  max-width: 100vw; 
+  align-items: center;
+  padding: 2rem 1.5rem 5rem;
+  min-height: calc(100vh - 10rem);
 }
 
-.shippingTitle h3{
-  font-size: 1.8rem;
+.shipping-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.shipping-header h2 {
+  color: var(--clr-primary-2);
+  margin-bottom: 0.65rem;
+}
+
+.shipping-divider {
+  width: 40px;
+  height: 2px;
+  background-color: var(--clr-primary-3);
+  margin: 0 auto;
 }
 
 .shipping-form {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.shipping-address {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
   width: 100%;
-  margin-top: 2rem;
+  max-width: 400px;
+  gap: 1.6rem;
 }
 
-.shipping-address label {
-  margin-right: 2rem;
+.shipping-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.shipping-field label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-primary-2);
   font-weight: 700;
-  text-align: right;
-  width: 30%;
 }
 
-.shipping-address input {
-  width: 70%;
-  background-color: var(--clr-primary-1);
+.shipping-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(79, 55, 80, 0.35);
+  border-radius: 0;
+  padding: 0.65rem 0;
+  font-size: 1rem;
+  color: var(--clr-primary-2);
+  transition: border-color 0.2s;
+  box-shadow: none;
 }
 
-.shipping-address input:focus {
-    border-color: var(--clr-primary-4);
-    -webkit-box-shadow: none;
-    box-shadow: none;
+.shipping-form input:focus {
+  outline: none;
+  border-bottom-color: var(--clr-primary-3);
+  box-shadow: none;
 }
 
-.shipping-address input::placeholder {
-  color: var(--clr-brown);
+.shipping-form input::placeholder {
+  color: rgba(79, 55, 80, 0.28);
+  font-size: 0.95rem;
 }
 
-.continue-btn {
-  margin-top: 2rem;
-  font-size: 1.5rem;
+.shipping-form button[type='submit'] {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
 }
