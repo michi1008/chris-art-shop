@@ -1,0 +1,97 @@
+.event-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem 5rem;
+  min-height: calc(100vh - 5rem);
+}
+
+.event-admin-title {
+  color: var(--clr-primary-2);
+  margin-bottom: 1.5rem;
+}
+
+.event-admin-create-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.7rem 1.6rem;
+}
+
+.event-admin-table {
+  width: min(900px, 100% - 2rem);
+  border-collapse: collapse;
+}
+
+.event-admin-table th,
+.event-admin-table td {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(79, 55, 80, 0.15);
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.event-admin-table thead th {
+  background: var(--clr-white);
+  color: var(--clr-primary-2);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.event-admin-table tbody td {
+  background: var(--clr-white);
+  color: var(--clr-text);
+}
+
+.event-admin-date-tag {
+  display: inline-block;
+  background: rgba(96, 133, 96, 0.1);
+  color: var(--clr-primary-5);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin: 0.15rem 0.2rem 0.15rem 0;
+  font-weight: 600;
+}
+
+.event-admin-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.event-admin-badge--on {
+  background: rgba(96, 133, 96, 0.12);
+  color: var(--clr-primary-5);
+}
+
+.event-admin-badge--off {
+  background: rgba(234, 104, 104, 0.1);
+  color: var(--clr-red);
+}
+
+.event-admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.event-admin-edit-btn {
+  background: var(--clr-primary-2);
+  color: #fff;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+.event-admin-delete-btn {
+  background: var(--clr-red);
+  color: #fff;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+}

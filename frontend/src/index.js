@@ -15,6 +15,9 @@ import AdminRoute from './components/AdminRoute';
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import ContactScreen from './screens/ContactScreen';
+import EventScreen from './screens/EventScreen';
+import EventListScreen from './screens/Admin/EventListScreen';
+import EventEditScreen from './screens/Admin/EventEditScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -46,6 +49,7 @@ const router = createBrowserRouter(
       />
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/contact' element={<ContactScreen />} />
+      <Route path='/events' element={<EventScreen />} />
       <Route path='/product/:id' element={<ProductScreen />} />
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
@@ -70,6 +74,8 @@ const router = createBrowserRouter(
         <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
         <Route path='/admin/userList' element={<UserListScreen />} />
         <Route path='/admin/user/:id/edit' element={<UserListEditScreen />} />
+        <Route path='/admin/eventList' element={<EventListScreen />} />
+        <Route path='/admin/event/:id/edit' element={<EventEditScreen />} />
       </Route>
     </Route>
   )

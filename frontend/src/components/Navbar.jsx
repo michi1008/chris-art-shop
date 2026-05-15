@@ -64,6 +64,9 @@ const Navbar = () => {
           <NavLink to='/about' onClick={handleLinkClick}>About</NavLink>
         </li>
         <li>
+          <NavLink to='/events' onClick={handleLinkClick}>Events</NavLink>
+        </li>
+        <li>
           <NavLink to='/contact' onClick={handleLinkClick}>Contact</NavLink>
         </li>
         <li>
@@ -112,6 +115,9 @@ const Navbar = () => {
               </NavLink>
               <NavLink className='dropdown-link' to='/admin/userList' onClick={handleLinkClick}>
                 Users
+              </NavLink>
+              <NavLink className='dropdown-link' to='/admin/eventList' onClick={handleLinkClick}>
+                Events
               </NavLink>
             </div>
           </div>
