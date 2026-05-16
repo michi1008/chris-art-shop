@@ -35,7 +35,7 @@ const OrderScreen = () => {
   } = useGetPayPalClientIdQuery();
 
   useEffect(() => {
-    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+    if (!errorPayPal && !loadingPayPal && paypal?.clientId) {
       const loadPaypalScript = async () => {
         paypalDispatch({
           type: 'resetOptions',
@@ -57,7 +57,7 @@ const OrderScreen = () => {
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
-        await payOrder({ orderId, details }).unwrap;
+        await payOrder({ orderId, details }).unwrap();
         refetch();
         toast.success('Order is paid');
       } catch (err) {

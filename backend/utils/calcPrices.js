@@ -58,7 +58,8 @@ function getTaxRateByLocation(shippingAddress) {
       'DC': 6.00
   };
   
-  return taxRates[shippingAddress.state] || 0.07;
+  const stateKey = shippingAddress.state?.trim().toUpperCase().slice(0, 2);
+  return taxRates[stateKey] ?? 0;
 }
 
 export function calcPrices(orderItems, shippingAddress, deliveryMethod) {

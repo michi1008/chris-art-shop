@@ -185,16 +185,8 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Function to log environment variables for debugging
-const logEnvVariables = () => {
-  console.log("Email:", process.env.EMAIL);
-  console.log("App Password:", process.env.PASSWORD_APP_EMAIL);
-  console.log("JWT Secret:", process.env.JWT_SECRET);
-};
-
 const forgetPassword = asyncHandler(async (req, res) => {
   try {
-    logEnvVariables();
     // Find the user by email
     const user = await User.findOne({ email: req.body.email });
 

@@ -9,14 +9,13 @@ import { Link } from 'react-router-dom';
 const OrderListScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
 
-  console.log(orders);
   return (
     <section className='admin-orderList'>
       <h1 className='admin-orderList-title'>Orders</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message mariant='danger'>{error}</Message>
+        <Message variant='warning'>{error?.data?.message || 'Failed to load orders'}</Message>
       ) : (
         <table>
           <thead>

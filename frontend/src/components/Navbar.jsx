@@ -28,7 +28,7 @@ const Navbar = () => {
       dispatch(resetCart());
       navigate('/login');
     } catch (error) {
-      console.log(error);
+      // logout errors are non-critical; session cookie is cleared server-side
     }
   };
   // Function to handle link click and close the menu
