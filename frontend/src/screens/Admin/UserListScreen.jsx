@@ -28,7 +28,7 @@ const UserListScreen = () => {
         {isLoading ? (
           <Loader />
           ) : error ? (
-          <Message mariant='danger'>{error.message}</Message>
+          <Message variant='warning'>{error?.data?.message || 'Failed to load users'}</Message>
           ) : (
           <table className='user-list-table'>
           <thead>
